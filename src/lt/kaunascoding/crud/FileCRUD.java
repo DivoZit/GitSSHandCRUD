@@ -1,6 +1,7 @@
 package lt.kaunascoding.crud;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -17,7 +18,7 @@ public class FileCRUD {
             System.out.println("Toks failas egzistuoja \u263A");
         } else {
             System.out.println("Toks failas neegzistuoja \uD83D\uDCA9");
-            System.out.println("Ar toki faila sukurti? T/N");
+            System.out.println("Ar toki faila sukurti? Y/N");
 
             String arSukurti = sc.nextLine();
             if (arSukurti.toLowerCase().equals("y")) {
@@ -28,6 +29,34 @@ public class FileCRUD {
                     e.printStackTrace();
                     System.out.println("Sum ting wong");
                 }
+            }
+        }
+    }
+
+    public void updateFile() {
+        System.out.println("Iveskite failo pavadinima");
+
+        Scanner sc = new Scanner(System.in);
+        String failoVardas = sc.nextLine();
+        File file = new File(failoVardas);
+
+        if (file.exists()) {
+            System.out.println("Toks failas egzistuoja.");
+            System.out.println("Iveskite teksta ir spauskite enter.");
+            System.out.println("Ivedus pabaiga, saugojimas bus baigtas.");
+
+            try {
+                FileWriter writer = new FileWriter(file, true);
+                String eilute;
+                do {
+                    eilute = sc.nextLine();
+                    if (!eilute.toLowerCase().equals("pabaiga")) {
+                        writer.write(eilute + "\n");
+                    }
+                } while (!eilute.toLowerCase().equals("pabaiga"));
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
