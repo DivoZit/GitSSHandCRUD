@@ -1,6 +1,7 @@
 package lt.kaunascoding.crud;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -56,6 +57,26 @@ public class FileCRUD {
                 } while (!eilute.toLowerCase().equals("pabaiga"));
                 writer.close();
             } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void readFile() {
+        System.out.println("Iveskite failo pavadinima");
+        Scanner sc = new Scanner(System.in);
+        String fileName = sc.nextLine();
+        File file = new File(fileName);
+
+        if (file.exists()) {
+            try {
+                Scanner fileScanner = new Scanner(file);
+                while (fileScanner.hasNext()) {
+                    String eilute = fileScanner.nextLine();
+                    System.out.println(eilute);
+                }
+                fileScanner.close();
+            } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
