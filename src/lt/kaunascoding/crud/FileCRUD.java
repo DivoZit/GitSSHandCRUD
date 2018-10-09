@@ -7,18 +7,16 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class FileCRUD {
+
+    private String fileName;
+
     public void createFile() {
-        System.out.println("Įveskite failo pavadinimą \u263A");
-
         Scanner sc = new Scanner(System.in);
-        String fileName = sc.nextLine();
-        System.out.println("Ivestas failo pavadinimas: " + fileName + " \u263B");
-
         File file = new File(fileName);
         if (file.exists()) {
             System.out.println("Toks failas egzistuoja \u263A");
         } else {
-            System.out.println("Toks failas neegzistuoja \uD83D\uDCA9");
+            System.out.println("Toks failas neegzistuoja \u263B");
             System.out.println("Ar toki faila sukurti? Y/N");
 
             String arSukurti = sc.nextLine();
@@ -35,17 +33,12 @@ public class FileCRUD {
     }
 
     public void updateFile() {
-        System.out.println("Iveskite failo pavadinima");
-
         Scanner sc = new Scanner(System.in);
-        String failoVardas = sc.nextLine();
-        File file = new File(failoVardas);
-
+        File file = new File(fileName);
         if (file.exists()) {
             System.out.println("Toks failas egzistuoja.");
             System.out.println("Iveskite teksta ir spauskite enter.");
             System.out.println("Ivedus pabaiga, saugojimas bus baigtas.");
-
             try {
                 FileWriter writer = new FileWriter(file, true);
                 String eilute;
@@ -63,11 +56,7 @@ public class FileCRUD {
     }
 
     public void readFile() {
-        System.out.println("Iveskite failo pavadinima");
-        Scanner sc = new Scanner(System.in);
-        String fileName = sc.nextLine();
         File file = new File(fileName);
-
         if (file.exists()) {
             try {
                 Scanner fileScanner = new Scanner(file);
@@ -83,9 +72,7 @@ public class FileCRUD {
     }
 
     public void deleteFile() {
-        System.out.println("Įveskite failo pavadinimą trinimui");
         Scanner sc = new Scanner(System.in);
-        String fileName = sc.nextLine();
         File file = new File(fileName);
         if (file.exists()) {
             System.out.println("Toks failas egzistuoja, ar tikrai norite trinti? y/N");
@@ -95,6 +82,12 @@ public class FileCRUD {
                 System.out.println("Failas sėkmingai ištrintas");
             }
         }
+    }
+
+    public void requestFileName() {
+        System.out.println("Įveskite failo pavadinimą \u263A");
+        Scanner sc = new Scanner(System.in);
+        fileName = sc.nextLine();
     }
 }
 
